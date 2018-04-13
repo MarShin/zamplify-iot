@@ -5,7 +5,7 @@ import subprocess
 import time
 
 endpoint = 'http://35.229.175.184/predict'
-filename = './rain.mp3'
+filename = 'sample.wav'
 
 def send_raw(wav):
     files = {'file': open(wav,'rb')}
@@ -23,7 +23,7 @@ def send_raw(wav):
 while (True):
     start_time = time.time()
     #p = subprocess.run(["arecord", "sample.wav", "-d", "5"], input=stdin, stdout=subprocess.PIPE, universal_newlines=True)
-    p = subprocess.run(["arecord", "sample.wav", "-d", "5"])
+    p = subprocess.run(["arecord", filename, "-d", "3", "-r", "22050", "-f", "S16_LE"])
     #out = p.stdout.strip()
     #err = p.stderr
     #if stdin == out:
