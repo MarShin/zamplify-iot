@@ -6,12 +6,13 @@ import time
 
 endpoint = 'http://35.229.175.184/predict'
 filename = 'sample.wav'
+device_id = 'zamplify_iot_9'
 count = 1
 
 def send_raw(wav):
     files = {'file': open(wav,'rb')}
-    payload = {'device_id' : 'zamplify_iot9'}
-    r = requests.post(endpoint, files=files, json=payload)
+    payload = (('device_id' , device_id),)
+    r = requests.post(endpoint, files=files, data=payload)
 
     print('Response for file upload')
     print('Status: '+str(r))
@@ -22,7 +23,7 @@ def send_raw(wav):
 
 #send_raw(filename)
 
-while (count<11):
+while (True):
     start_time = time.time()
     #p = subprocess.run(["arecord", "sample.wav", "-d", "5"], input=stdin, stdout=subprocess.PIPE, universal_newlines=True)
     p = subprocess.run(["arecord", filename, "-d", "3", "-r", "22050", "-f", "S16_LE"])
